@@ -56,9 +56,9 @@ services:
 
 
   apache:
-    build: ../../../../Desktop/l3-php-Multi-user
+    build: .
     env_file:
-      - ../../../../Desktop/l3-php-Multi-user/.env
+      - .env
     labels:
       - traefik.enable=true
       - traefik.http.routers.local-eurovent.rule=Host(`local.project.com`)
