@@ -54,7 +54,7 @@ RUN rm -rf /var/www/html/*
 
 RUN chmod +x -R /usr/bin
 
-COPY --chown=www-data:www-data . /var/www/html
+COPY --chown=www-data:www-data ../../../../Desktop/l3-php-Multi-user /var/www/html
 
 EXPOSE 80
 
