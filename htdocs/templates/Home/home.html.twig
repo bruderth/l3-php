@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pronos'clic{% endblock %}
+
+{% block body %}
+    <div style="width: 90%; border: 4mm ridge rgb(255,0,0); margin: 0 auto 0 auto;">
+        <div style="color: red; font-size: 150px; margin: 30px auto 0 auto; width: fit-content; font-weight: bold;">Pronos'clic</div>
+        <div style="width: fit-content; margin: 0 auto 20px auto; font-weight: bold;">Bienvenue sur le plus ridicule des site de paris en ligne</div>
+    </div>
+    {% if app.user %}
+    <div style="font-size: 20px; margin: 30px auto 30px auto; width: fit-content">Vous êtes connecté en tant que <u>{{ app.user.email }}</u></div>
+    {% else %}
+    <div style="font-size: 20px; margin: 30px auto 30px auto; width: fit-content">Vous n'êtes pas connecté, connectez-vous pour pouvoir parier avec nous !</div>
+    {% endif %}
+    <div style="width: fit-content; margin: 300px auto 0 auto; display: flex;">
+        {%  if not app.user %}
+        <a href="/login"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Se connecter</button></div></a>
+        <a href="/register"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Créer un compte</button></div></a>
+        {%  endif %}
+        <a href="/"> <div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Classement</button></div></a>
+        <a href="/"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Score</button></div></a>
+        <a href="/"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Contactez-nous</button></div></a>
+        {% if app.user %}
+            <a href="/"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Mon compte</button></div></a>
+            <a href="/logout"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Se déconnecter</button></div></a>
+        {% endif %}
+    </div>
+
+{% endblock %}
