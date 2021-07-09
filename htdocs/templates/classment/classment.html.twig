@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Classement des joueurs{% endblock %}
+
+{% block body %}
+    <div style="width: fit-content;margin: auto; display: flex;">
+        {%  if not app.user %}
+            <a href="/login"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Se connecter</button></div></a>
+            <a href="/register"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Créer un compte</button></div></a>
+        {%  endif %}
+        <a href="/"> <div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Classement</button></div></a>
+        <a href="/score"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Score</button></div></a>
+        <a href="/contact"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Contactez-nous</button></div></a>
+        {% if app.user %}
+            <a href="/profil"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Mon compte</button></div></a>
+            <a href="/logout"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Se déconnecter</button></div></a>
+        {% endif %}
+    </div>
+    <div>Liste des classements </div>
+    {% if not users %}
+    <div>La liste est vide.</div>
+    {% else %}
+        {% set compteur = 1 %}
+    {% for key,ord in order %}
+    <div>{{ compteur }}. {{ users[key].email }}</div>
+        {% set compteur = compteur + 1 %}
+    {% endfor %}
+    {%  endif %}
+{% endblock %}
