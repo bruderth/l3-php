@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des matchs{% endblock %}
+
+{% block body %}
+    <div>
+        <div style="font-size: 100px; text-align: center; color: red;">Listes des matchs</div>
+        {% set compteur = 0 %}
+        {% for match in matchs %}
+        <div style="border: solid black 1px; background-color: blue; margin: 10px 0 10px 0; color: black; font-size: 30px; padding:10px;">
+            <div style="display: inline-block; width:30%; ">
+                <div>{{ match.teams.domicile }}</div>
+                <div>{{ match.teams.exterieur }}</div>
+                <div>Le {{ match.date|split(' ')[0]|split('-')[2] }}/{{ match.date|split(' ')[0]|split('-')[1] }}/{{ match.date|split(' ')[0]|split('-')[0] }},</div>
+                <div>À {{ match.date|split(' ')[1]|split(':')[0] }}h {{ match.date|split(' ')[1]|split(':')[1] }}.</div>
+            </div>
+            <!-- Partie qui change en fonction -->
+            {% if "now"|date("U") > match.date|date("U") %}
+                <div style="display: inline-block; position:relative; bottom: 40px; ">
+            <!-- Le match est déjà terminé -->
+                {% if match.scores.tireaubut == true %}
+                    <!-- affichage du gagnant au tir au but -->
+                    {% set winner = match.scores.winner %}
+                    <div>Le gagnant est {{ match.teams[winner] }} au tir au but.</div>
+                {% else %}
+                    <!-- affichage du gagnant -->
+                    {% set winner = match.scores.domicile > match.scores.exterieur ? match.teams.domicile : match.teams.exterieur  %}
+                    <div>Le gagnant est {{ winner }}.</div>
+                    <div>{{ match.teams.domicile }} : {{ match.scores.domicile }} / {{ match.scores.exterieur }} : {{ match.teams.exterieur }}</div>
+                {% endif %}
+                </div>
+            {% else %}
+            <!-- Le match n'est pas encore commencer -->
+                <div style="display: inline-block; position: relative; bottom: 10px;">
+                    <form method="post" action="create_gamble">
+                        <div>
+
+                        <input type="hidden" value="{{ compteur }}" name="id_score">
+                        <label for="score_domcicile">Score pour {{ match.teams.domicile }}</label>
+                        <input type="number" name="score_domicile" id="inputScoreDomicile" required autofocus>
+                        </div>
+                        <div>
+                        <label for="score_exterieur">Score pour {{ match.teams.exterieur }}</label>
+                        <input type="number"  name="score_exterieur" id="inputScoreExterieur" required autofocus>
+                        </div>
+                        <div style="width: fit-content; margin: 0 auto 0 auto;">
+                        <button type="submit">
+                            Valider
+                        </button>
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+            {% set compteur = compteur + 1 %}
+        {% endfor %}
+    </div>
+{% endblock %}
