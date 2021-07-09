@@ -29,7 +29,7 @@
                     <div>{{ match.teams.domicile }} : {{ match.scores.domicile }} / {{ match.scores.exterieur }} : {{ match.teams.exterieur }}</div>
                 {% endif %}
                 </div>
-            {% else %}
+            {% elseif app.user %}
             <!-- Le match n'est pas encore commencer -->
                 <div style="display: inline-block; position: relative; bottom: 10px;">
                     <form method="post" action="create_gamble">
@@ -50,6 +50,8 @@
                         </div>
                     </form>
                 </div>
+            {% else %}
+                <div style="display: inline-block; position: relative; bottom: 10px;">Connectez-vous pour pouvoir parier sur notre site !</div>
             {% endif %}
         </div>
             {% set compteur = compteur + 1 %}

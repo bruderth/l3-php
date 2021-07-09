@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+    {% for gamble in gambles %}
+        <div>Mon profil</div>
+        <div style="display: flex;">
+            <div style="display: inline-block;">
+                <div>{{ gamble.getIdUser()}}</div>
+                <div>{{ matchs[gamble.getIdUser()+1].teams.domicile }}</div>
+                <div>{{ matchs[gamble.getIdUser()+1].teams.exterieur }}</div>
+            </div>
+            <div style="display: inline-block;">
+                <div>Vous avez parié :</div>
+                <div>{{ gamble.getScoreDomicile() }}</div>
+                <div>{{ gamble.getScoreExterieur() }}</div>
+            </div>
+            <div style="display: inline-block;">
+                {% if matchs[gamble.getIdUser()+1].scores is defined %}
+                {% set winner = gamble.getScoreDomicile() > gamble.getScoreExterieur() ? "domicile" : "exterieur" %}
+                    {% if matchs[gamble.getIdUser()+1].scores.domicile == gamble.getScoreDomicile() and matchs[gamble.getIdUser()+1].scores.exterieur == gamble.getScoreExterieur()  %}
+                        <div>Vous avez gagné 3 points.</div>
+                    {% elseif matchs[gamble.getIdUser()+1].scores.winner == winner %}
+                        <div>Vous avez gagné 1 points. </div>
+                    {% endif %}
+                <div></div>
+                {% else %}
+                <div>La match n'est pas encore passé.</div>
+                {% endif %}
+            </div>
+        </div>
+
+    {% endfor %}
+    <div>Votre score est de {{ point }} points.</div>
+{% endblock %}
