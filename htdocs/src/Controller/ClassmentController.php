@@ -53,7 +53,5 @@ class ClassmentController extends AbstractController
         asort($arr);
         return $this->render('classment/classment.html.twig', ['users' => $users , "order" => $arr]);
 
-
-
     }
 }
