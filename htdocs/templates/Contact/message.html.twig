@@ -3,6 +3,19 @@
 {% block title %}Contact{% endblock %}
 
 {% block body %}
+    <div style="width: fit-content; display: flex; margin: auto;">
+        {%  if not app.user %}
+            <a href="/login"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Se connecter</button></div></a>
+            <a href="/register"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Créer un compte</button></div></a>
+        {%  endif %}
+        <a href="/"> <div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Classement</button></div></a>
+        <a href="/score"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Score</button></div></a>
+        <a href="/contact"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Contactez-nous</button></div></a>
+        {% if app.user %}
+            <a href="/profil"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Mon compte</button></div></a>
+            <a href="/logout"><div style="margin: 0 10px 0 10px; display: inline-block;"><button style="background-color: white; height: 50px; width: 150px; border: 4mm ridge rgba(255, 0, 0); cursor:pointer;" type="button">Se déconnecter</button></div></a>
+        {% endif %}
+    </div>
     {{ form_start(form) }}
     {{ form_row(form.email) }}
     {{ form_row(form.message) }}
